@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactChild } from 'react';
-import { View, Text, Button } from 'react-native';
+import {View} from 'react-native';
 import Header from './Header';
 import { HINT_OF_READ_COLOR, OXFORD_BLUE_COLOR } from '../constants/constants';
 import { DrawerNavigationProp } from '@react-navigation/drawer';

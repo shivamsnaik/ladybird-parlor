@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import {Text, View} from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import PageContainer from '../components/PageContainer';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
