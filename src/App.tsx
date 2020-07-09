@@ -5,14 +5,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from './screens/Home';
 import ListItems from './screens/List Items';
 import { StatusBar } from 'react-native';
-import { ORANGE } from './constants/constants';
+import { HINT_OF_READ_COLOR } from './constants/constants';
 
 type AppProps = {}
 
 export const App: FunctionComponent<AppProps> = () => {
   return(
     <>
-      <StatusBar barStyle ='dark-content' backgroundColor={ORANGE}/>
+      <StatusBar barStyle ='dark-content' backgroundColor={HINT_OF_READ_COLOR}/>
       <Drawer />
     </>
   );
