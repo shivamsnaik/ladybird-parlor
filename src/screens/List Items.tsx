@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import {Text, View} from 'react-native';
-import { ParamListBase, RouteProp } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
+import PageContainer from '../components/PageContainer';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 interface Props{
-  navigation: RouteProp<ParamListBase, 'List Items'>;
+  navigation: DrawerNavigationProp<ParamListBase, 'List Items'>;
 }
 
-const ListItems: FunctionComponent<Props> = () => {
+const ListItems: FunctionComponent<Props> = ({navigation}) => {
   return(
-    <View>
-      <Text>List items</Text>
-    </View>
+    <>
+      <PageContainer showHeader={true} headerTitle='List Items' drawerNavigation={navigation}/>
+    </>
   );
 };
 

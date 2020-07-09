@@ -7,7 +7,7 @@ type Props = {
   textStyle?: StyleProp<TextStyle>
 };
 
-const Header: FunctionComponent<Props> = ({title, style, textStyle}) => {
+const Header: FunctionComponent<Props> = ({title, style, textStyle, ...prop}) => {
   return(
     <View style={[{alignItems: 'center', justifyContent: 'center'}, style]}>
       <Text style={textStyle}>

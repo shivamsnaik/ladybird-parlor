@@ -11,7 +11,7 @@ interface Props{
 const Home: FunctionComponent<Props> = ({navigation}) => {
   return(
     <>
-      <PageContainer headerTitle='Welcome to Ladybird Parlor'>
+      <PageContainer showHeader={true} headerTitle='Lady Bird' drawerNavigation={navigation}>
         <Text>Helloworld</Text>
       </PageContainer>
     </>
