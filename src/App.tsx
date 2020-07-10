@@ -1,37 +1,18 @@
 import 'react-native-gesture-handler';
 import React, { FunctionComponent } from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import Home from './screens/Home';
-import ListItems from './screens/List Items';
 import { StatusBar } from 'react-native';
-import { HINT_OF_READ_COLOR } from './constants/constants';
+import { OXFORD_BLUE_COLOR } from './constants/constants';
+import RootNavigator from './navigation/RootNavigator';
 
-type AppProps = {}
+type AppProps = {};
 
 export const App: FunctionComponent<AppProps> = () => {
   return(
     <>
-      <StatusBar barStyle ='dark-content' backgroundColor={HINT_OF_READ_COLOR}/>
-      <Drawer />
+      <StatusBar barStyle ='light-content' backgroundColor={OXFORD_BLUE_COLOR}/>
+      <RootNavigator/>
     </>
   );
 };
 
-const DrawerNavigator = createDrawerNavigator();
-const Drawer = () => {
-  return(
-    <NavigationContainer >
-      <DrawerNavigator.Navigator
-        screenOptions={{
-        }}
-      >
-        <DrawerNavigator.Screen name='Home' component={Home}/>
-        <DrawerNavigator.Screen name='List Items' component={ListItems}/>
-      </DrawerNavigator.Navigator>
-    </NavigationContainer>
-  );
-};
-
-export default App
-;
+export default App;

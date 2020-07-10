@@ -150,6 +150,15 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+//        release{
+//            storeFile file('keystore-certificate.jks')
+//            println("Enter password")
+//            storePassword System.in.newReader().readLine()
+//            println("Enter Alias")
+//            keyAlias System.in.newReader().readLine()
+//            println("Enter Alias password")
+//            keyPassword System.in.newReader().readLine()
+//        }
     }
     buildTypes {
         debug {

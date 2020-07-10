@@ -10,31 +10,31 @@ type Props = {
   showHeader?: boolean;
   headerTitle?: string;
   children?: ReactChild;
-  drawerNavigation?: DrawerNavigationProp<ParamListBase>
+  drawerNavigation?: DrawerNavigationProp<ParamListBase>;
 };
 
-const PageContainer: FunctionComponent<Props> = ({showHeader, headerTitle='Default Title', children, drawerNavigation, ...prop}) => {
+const PageContainer: FunctionComponent<Props> = ({showHeader, headerTitle='Default Title', children, drawerNavigation}) => {
   return(
     <>
       {showHeader &&
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{flex: 1, backgroundColor: HINT_OF_READ_COLOR, justifyContent: 'center'}}>
+        <View style={[{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
+          <View style={{flex: 1, backgroundColor: OXFORD_BLUE_COLOR, justifyContent: 'center'}}>
             <Icon
               name='ellipsis-horizontal-outline'
               type='ionicon'
               size={35}
-              color='black'
+              color='white'
               onPress={() => drawerNavigation?.openDrawer()}
             />
           </View>
           <Header
             title={headerTitle}
-            style={{backgroundColor: HINT_OF_READ_COLOR, flex: 5, alignItems: 'flex-start'}}
-            textStyle={{color: OXFORD_BLUE_COLOR, fontSize: 20, fontWeight: 'bold'}}
+            style={{backgroundColor: OXFORD_BLUE_COLOR, flex: 5, alignItems: 'flex-start'}}
+            textStyle={{color: HINT_OF_READ_COLOR, fontSize: 20, fontWeight: 'bold'}}
           />
         </View>
       }
-      <View style={{backgroundColor: OXFORD_BLUE_COLOR, flex: 15}}>
+      <View style={{backgroundColor: HINT_OF_READ_COLOR, flex: 15}}>
         {children}
       </View>
     </>
