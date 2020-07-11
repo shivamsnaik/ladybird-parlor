@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { View, Text, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 };
 
 const Header: FunctionComponent<Props> = ({title, style, textStyle, ...prop}) => {
+  useEffect(() => {}, []);
   return(
     <View style={[{alignItems: 'center', justifyContent: 'center'}, style]}>
       <Text style={textStyle}>

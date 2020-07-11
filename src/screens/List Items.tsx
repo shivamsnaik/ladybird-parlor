@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ParamListBase } from '@react-navigation/native';
-import PageContainer from '../components/PageContainer';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import PagePureContainer from '../components/PageContainer';
 
 interface Props{
   navigation: DrawerNavigationProp<ParamListBase, 'List Items'>;
@@ -10,7 +10,7 @@ interface Props{
 const ListItems: FunctionComponent<Props> = ({navigation}) => {
   return(
     <>
-      <PageContainer showHeader={true} headerTitle='List Items' drawerNavigation={navigation}/>
+      <PagePureContainer showHeader={true} headerTitle='List Items' drawerNavigation={navigation}/>
     </>
   );
 };

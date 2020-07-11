@@ -25,4 +25,5 @@ const RootNavigator: FunctionComponent = () => (
   </NavigationContainer>
 );
 
-export default RootNavigator;
+const RootPureNavigator = React.memo(RootNavigator);
+export default RootPureNavigator;
