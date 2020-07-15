@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Tab = createBottomTabNavigator();
-const HomeScreen: FunctionComponent<Props> = ({navigation}) => {
+const BottomTab: FunctionComponent<Props> = ({navigation}) => {
   return(
     <Tab.Navigator
       backBehavior='initialRoute'
@@ -53,4 +53,4 @@ const HomeScreen: FunctionComponent<Props> = ({navigation}) => {
   );
 };
 
-export default HomeScreen;
+export default BottomTab;
