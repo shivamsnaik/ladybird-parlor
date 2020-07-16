@@ -1,36 +1,19 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
 import { AuthContext } from '../security/UserLogin';
+import { loginUser } from '../api/AuthenticationApi';
+import AsyncStorage from '@react-native-community/async-storage';
 
 type Props = {};
 
 const Login: FunctionComponent<Props> = () => {
   const [email, setEmail] = useState('');
-  const {dispatch} = React.useContext(AuthContext);
   const [password, setPassword] = useState('');
+  const {dispatch} = React.useContext(AuthContext);
 
-  const loginUser = (username: string, pwd: string) => {
-    auth()
-    .signInWithEmailAndPassword(username, pwd)
-    .then((response) => {
-      console.log(`User ${response.user.email} logged in`);
-      dispatch({type: 'LOGIN', payload: response.user});
-    })
-    .catch((error) => {
-      console.log(error.code);
-      // setUser(null);
-    });
-  };
-
-  const logoutUser = () => {
-    auth()
-      .signOut()
-      .then(() => {
-        console.log('User logged out');
-      });
-  };
+  useEffect(() => {
+  });
 
   return(
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -51,7 +34,7 @@ const Login: FunctionComponent<Props> = () => {
         title='Login'
         type='outline'
         loading={false}
-        onPress={() => loginUser(email, password)}
+        onPress={() => loginUser(email, password, dispatch)}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { OXFORD_BLUE_COLOR, HINT_OF_READ_COLOR } from '../constants/constants';
@@ -6,18 +6,23 @@ import BottomTab from './Tabs/BottomTab';
 import Login from '../screens/Login';
 import { Reducer } from '../config/StateConfig';
 import { InitialUserState, AuthContext } from '../security/UserLogin';
-
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Drawer = createDrawerNavigator();
-
 const RootNavigator: FunctionComponent = () => {
   // REQUIRED IN FUTURE FOR SPLASH SCREEN
   // const [init, setInit] = useState(true);
-  // const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [user, dispatch] = React.useReducer(Reducer, InitialUserState);
+  // const [isAuthenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-
+    // const uniqueId = AsyncStorage.getItem('uid');
+    AsyncStorage.getItem('email').then((value) => {
+      console.log('ROOT NAVIGATOR: ' + value);
+      AsyncStorage.getItem('uid').then((uidValue) => {
+        if (value !== null) dispatch({type: 'LOGGED_IN', payload: {email: value, uid: uidValue}});
+      });
+    });
   }, [user.isAuthenticated]);
   return (
     <AuthContext.Provider
