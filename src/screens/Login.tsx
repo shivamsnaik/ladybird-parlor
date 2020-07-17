@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { AuthContext } from '../security/UserLogin';
 import { loginUser } from '../api/AuthenticationApi';
-import AsyncStorage from '@react-native-community/async-storage';
 
 type Props = {};
 

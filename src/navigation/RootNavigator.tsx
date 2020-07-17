@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { OXFORD_BLUE_COLOR, HINT_OF_READ_COLOR } from '../constants/constants';
@@ -7,23 +7,34 @@ import Login from '../screens/Login';
 import { Reducer } from '../config/StateConfig';
 import { InitialUserState, AuthContext } from '../security/UserLogin';
 import AsyncStorage from '@react-native-community/async-storage';
+import LoadingPage from '../screens/LoadingPage';
 
 const Drawer = createDrawerNavigator();
 const RootNavigator: FunctionComponent = () => {
-  // REQUIRED IN FUTURE FOR SPLASH SCREEN
-  // const [init, setInit] = useState(true);
   const [user, dispatch] = React.useReducer(Reducer, InitialUserState);
-  // const [isAuthenticated, setAuthenticated] = useState(false);
+  const [loadingParams, setLoadingParams] = useState({isLoading: true});
 
   useEffect(() => {
-    // const uniqueId = AsyncStorage.getItem('uid');
-    AsyncStorage.getItem('email').then((value) => {
+    if (user.isAuthenticated) {
+      setLoadingParams({...loadingParams, isLoading: false});
+      return;
+    }
+
+    // CHECK IF USER IS ALREADY LOGGED IN
+    AsyncStorage.getItem('email')
+    .then((value) => {
+      if (value === null) { setLoadingParams({...loadingParams, isLoading: false}); }
       console.log('ROOT NAVIGATOR: ' + value);
       AsyncStorage.getItem('uid').then((uidValue) => {
         if (value !== null) dispatch({type: 'LOGGED_IN', payload: {email: value, uid: uidValue}});
       });
+    })
+    .catch((e) => {
+      console.log('ROOT NAVIGATOR ERROR: ' + e);
+      setLoadingParams({...loadingParams, isLoading: false});
     });
-  }, [user.isAuthenticated]);
+  }, [user.isAuthenticated, loadingParams.isLoading]);
+
   return (
     <AuthContext.Provider
       value={{user, dispatch}}
@@ -41,14 +52,19 @@ const RootNavigator: FunctionComponent = () => {
           }
         }
       >
-        <Drawer.Navigator>
+        {
+          loadingParams.isLoading ?
+          <LoadingPage/>
+          :
+          <Drawer.Navigator>
           {
-            user.isAuthenticated === false ?
+            (user.isAuthenticated === false) ?
               <Drawer.Screen name='Login' component={Login}/>
             :
               <Drawer.Screen name='Home' component={BottomTab}/>
           }
-        </Drawer.Navigator>
+          </Drawer.Navigator>
+        }
       </NavigationContainer>
     </AuthContext.Provider>
   );

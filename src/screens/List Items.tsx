@@ -7,7 +7,7 @@ import { Card, ListItem } from 'react-native-elements';
 import { OXFORD_BLUE_COLOR } from '../constants/constants';
 
 interface Props{
-  navigation: DrawerNavigationProp<ParamListBase, 'Home'>;
+  navigation?: DrawerNavigationProp<ParamListBase, 'Home'>;
 }
 
 const ListItems: FunctionComponent<Props> = ({navigation}) => {
