@@ -1,60 +1,49 @@
 import React, { FunctionComponent, ReactChild, useEffect } from 'react';
-import {View, SafeAreaView, ViewStyle} from 'react-native';
-import Header from './Header';
-import { HINT_OF_READ_COLOR, OXFORD_BLUE_COLOR } from '../constants/constants';
+import { ViewStyle, StyleProp, ScrollViewComponent } from 'react-native';
+import { OXFORD_BLUE_COLOR, DIM_WHITE_COLOR, BLACK_COLOR } from '../constants/constants';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
-import { Icon, Button } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
 import { AuthContext } from '../security/UserLogin';
 import { logoutUser } from '../api/AuthenticationApi';
+import FadeAnimationView from '../animations/FadeAnimationView';
+import { Container, Header, Left, Button, Icon, Title, Body, Right, Text, Content, View } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type Props = {
-  showHeader?: boolean;
-  headerTitle?: string;
+  headerTitle: string;
   children?: ReactChild;
   drawerNavigation?: DrawerNavigationProp<ParamListBase>;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 };
 
-const PageContainer: FunctionComponent<Props> = ({showHeader, headerTitle='Default Title', children, drawerNavigation, ...prop}) => {
+const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children, style, drawerNavigation, ...prop}) => {
   useEffect(() => {}, []);
   const {dispatch} = React.useContext(AuthContext);
 
   return(
-    <SafeAreaView style={[{marginBottom: 0}, prop.style]}>
-      {showHeader &&
-        <View style={[{minHeight: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}]}>
-          <View style={{flex: 1, justifyContent: 'center', backgroundColor: OXFORD_BLUE_COLOR}}>
-            <Icon
-              name='ellipsis-horizontal-outline'
-              type='ionicon'
-              size={35}
-              color='white'
-              onPress={() => drawerNavigation?.openDrawer()}
-            />
-          </View>
-          <Header
-            title={headerTitle}
-            style={{backgroundColor: OXFORD_BLUE_COLOR, flex: 5, alignItems: 'flex-start'}}
-            textStyle={{color: HINT_OF_READ_COLOR, fontSize: 20, fontWeight: 'bold'}}
-          />
-          <Button
-            containerStyle={{shadowColor: OXFORD_BLUE_COLOR}}
-            title='Logout'
-            style={{flex: 1, alignSelf: 'center'}}
-            onPress={() => logoutUser(dispatch)}
-          />
-        </View>
-      }
+    <FadeAnimationView style={[{backgroundColor: OXFORD_BLUE_COLOR, paddingBottom: 20, flex: 1}, style]}>
+      <Container>
+        <Header androidStatusBarColor={OXFORD_BLUE_COLOR} style={{backgroundColor: OXFORD_BLUE_COLOR}}>
+          <Left>
+            <Button transparent onPress={() => drawerNavigation?.toggleDrawer()}>
+              <Icon name='menu'/>
+            </Button>
+          </Left>
+          <Body>
+            <Title>Home</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => {console.log('LOGOUT PRESSED'); logoutUser(dispatch); }}>
+              <Text style={{color: DIM_WHITE_COLOR}}>Logout</Text>
+              <Icon name='arrow-forward-circle'/>
+            </Button>
+          </Right>
+        </Header>
         <ScrollView>
-          <View style={{backgroundColor: OXFORD_BLUE_COLOR}}>
-            <>
-              {children}
-            </>
-          </View>
+          {children}
         </ScrollView>
-    </SafeAreaView>
+      </Container>
+    </FadeAnimationView>
   );
 };
 

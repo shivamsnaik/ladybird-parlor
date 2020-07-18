@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { AuthContext } from '../security/UserLogin';
 import { loginUser } from '../api/AuthenticationApi';
 import { Container, Header, Form, Item, Label, Input, Text, Button, Body, Title, Toast, Root } from 'native-base';
+import { OXFORD_BLUE_COLOR } from '../constants/constants';
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const Login: FunctionComponent<Props> = () => {
   return(
     <Root>
       <Container>
-        <Header>
+        <Header androidStatusBarColor={OXFORD_BLUE_COLOR} style={{backgroundColor: OXFORD_BLUE_COLOR}}>
           <Body style={{flex: 1, alignItems: 'center'}}>
             <Title>Login</Title>
           </Body>
@@ -44,7 +45,7 @@ const Login: FunctionComponent<Props> = () => {
               />
             </Item>
             <Button
-              style={{margin: 30, justifyContent: 'center'}}
+              style={{margin: 30, justifyContent: 'center', backgroundColor: OXFORD_BLUE_COLOR}}
               onPress={() => {
                 console.log(email + password);
                 if (email.length === 0 || password.length === 0) {
@@ -59,12 +60,14 @@ const Login: FunctionComponent<Props> = () => {
                 loginUser(email, password, dispatch)
                 .catch((e) => {
                   console.log('LOGIN: CATCH RECEIVED');
-                  Toast.show({
-                    text: 'Wrong password!',
-                    buttonText: 'Okay',
-                    position: 'bottom',
-                    type: 'danger',
-                  });
+                  if (e) {
+                    Toast.show({
+                      text: 'Wrong password!',
+                      buttonText: 'Okay',
+                      position: 'bottom',
+                      type: 'danger',
+                    });
+                  }
                 });
               }}
             >
