@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 
-export const loginUser = (email: string, pwd: string, dispatch: any) => {
+export const loginUser = async (email: string, pwd: string, dispatch: any) => {
   auth()
   .signInWithEmailAndPassword(email, pwd)
   .then((response) => {
@@ -8,7 +8,8 @@ export const loginUser = (email: string, pwd: string, dispatch: any) => {
     dispatch({type: 'LOGIN', payload: {email: response.user.email, uid: response.user.uid}});
   })
   .catch((error) => {
-    console.log('AUTH API: ' + error.code);
+    console.log('AUTH API ERROR: ' + error.code);
+    return Promise.reject(error);
   });
 };
 

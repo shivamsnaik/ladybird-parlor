@@ -56,13 +56,11 @@ const RootNavigator: FunctionComponent = () => {
           loadingParams.isLoading ?
           <LoadingPage/>
           :
+          user.isAuthenticated === false ?
+            <Login/>
+          :
           <Drawer.Navigator>
-          {
-            (user.isAuthenticated === false) ?
-              <Drawer.Screen name='Login' component={Login}/>
-            :
-              <Drawer.Screen name='Home' component={BottomTab}/>
-          }
+            <Drawer.Screen name='Home' component={BottomTab}/>
           </Drawer.Navigator>
         }
       </NavigationContainer>
