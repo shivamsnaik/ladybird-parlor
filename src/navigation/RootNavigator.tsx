@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { OXFORD_BLUE_COLOR, HINT_OF_READ_COLOR } from '../constants/constants';
