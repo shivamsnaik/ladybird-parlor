@@ -3,10 +3,11 @@ import { StyleProp, ViewStyle, Easing } from 'react-native';
 import { Animated } from 'react-native';
 
 type Props = {
+  animationParams?: Animated.TimingAnimationConfig;
   style?: StyleProp<ViewStyle>,
 };
 
-const FadeAnimationView: FunctionComponent<Props> = ({style, children}) => {
+const FadeAnimationView: FunctionComponent<Props> = ({animationParams, style, children}) => {
   const fadeAnimationInitValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     startAnimation();
@@ -15,10 +16,11 @@ const FadeAnimationView: FunctionComponent<Props> = ({style, children}) => {
   const startAnimation = () => {
     Animated.timing(fadeAnimationInitValue,
       {
-        toValue: 1,
-        duration: 300,
+        duration: 200,
         easing: Easing.ease,
+        ...animationParams,
         useNativeDriver: true,
+        toValue: 1,
       },
     ).start();
   };

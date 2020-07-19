@@ -3,6 +3,7 @@ import { AuthContext } from '../security/UserLogin';
 import { loginUser } from '../api/AuthenticationApi';
 import { Container, Header, Form, Item, Label, Input, Text, Button, Body, Title, Toast, Root } from 'native-base';
 import { OXFORD_BLUE_COLOR } from '../constants/constants';
+import FadeAnimationView from '../animations/FadeAnimationView';
 
 type Props = {};
 
@@ -16,67 +17,69 @@ const Login: FunctionComponent<Props> = () => {
   });
 
   return(
-    <Root>
-      <Container>
-        <Header androidStatusBarColor={OXFORD_BLUE_COLOR} style={{backgroundColor: OXFORD_BLUE_COLOR}}>
-          <Body style={{flex: 1, alignItems: 'center'}}>
-            <Title>Login</Title>
-          </Body>
-        </Header>
-        <Container style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Form style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Login</Text>
-            <Item floatingLabel bordered>
-              <Label>Username</Label>
-              <Input
-                autoCompleteType='email'
-                autoCapitalize='none'
-                keyboardType='email-address'
-                onChangeText={(text) => setEmail(text)}
-              />
-            </Item>
-            <Item floatingLabel bordered >
-              <Label>Password</Label>
-              <Input
-                autoCompleteType='password'
-                autoCapitalize='none'
-                secureTextEntry={true}
-                onChangeText={(text) => setPassword(text)}
-              />
-            </Item>
-            <Button
-              style={{margin: 30, justifyContent: 'center', backgroundColor: OXFORD_BLUE_COLOR}}
-              onPress={() => {
-                console.log(email + password);
-                if (email.length === 0 || password.length === 0) {
-                  Toast.show({
-                    text: 'Please enter a valid email and password',
-                    buttonText: 'Okay',
-                    position: 'bottom',
-                    type: 'danger',
-                  });
-                  return;
-                }
-                loginUser(email, password, dispatch)
-                .catch((e) => {
-                  console.log('LOGIN: CATCH RECEIVED');
-                  if (e) {
+    <FadeAnimationView animationParams={{duration: 100, toValue: 1, useNativeDriver: true}} style={{flex: 1}}>
+      <Root>
+        <Container>
+          <Header androidStatusBarColor={OXFORD_BLUE_COLOR} style={{backgroundColor: OXFORD_BLUE_COLOR}}>
+            <Body style={{flex: 1, alignItems: 'center'}}>
+              <Title>Login</Title>
+            </Body>
+          </Header>
+          <Container style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Form style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>Login</Text>
+              <Item floatingLabel bordered>
+                <Label>Username</Label>
+                <Input
+                  autoCompleteType='email'
+                  autoCapitalize='none'
+                  keyboardType='email-address'
+                  onChangeText={(text) => setEmail(text)}
+                />
+              </Item>
+              <Item floatingLabel bordered >
+                <Label>Password</Label>
+                <Input
+                  autoCompleteType='password'
+                  autoCapitalize='none'
+                  secureTextEntry={true}
+                  onChangeText={(text) => setPassword(text)}
+                />
+              </Item>
+              <Button
+                style={{margin: 30, justifyContent: 'center', backgroundColor: OXFORD_BLUE_COLOR}}
+                onPress={() => {
+                  console.log(email + password);
+                  if (email.length === 0 || password.length === 0) {
                     Toast.show({
-                      text: 'Wrong password!',
+                      text: 'Please enter a valid email and password',
                       buttonText: 'Okay',
                       position: 'bottom',
                       type: 'danger',
                     });
+                    return;
                   }
-                });
-              }}
-            >
-              <Text>Login</Text>
-            </Button>
-          </Form>
+                  loginUser(email, password, dispatch)
+                  .catch((e) => {
+                    console.log('LOGIN: CATCH RECEIVED');
+                    if (e) {
+                      Toast.show({
+                        text: 'Wrong password!',
+                        buttonText: 'Okay',
+                        position: 'bottom',
+                        type: 'danger',
+                      });
+                    }
+                  });
+                }}
+              >
+                <Text>Login</Text>
+              </Button>
+            </Form>
+          </Container>
         </Container>
-      </Container>
-    </Root>
+      </Root>
+    </FadeAnimationView>
   );
 };
 
