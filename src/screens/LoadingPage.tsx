@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useRef, useEffect } from 'react';
-import {Animated, Easing, StatusBar} from 'react-native';
+import {Animated, Easing, StatusBar, StyleProp, ViewStyle} from 'react-native';
 import { DIM_WHITE_COLOR, BLUE_COLOR } from '../constants/constants';
 import ShrinkAnimationView from '../animations/ShrinkAnimationView';
 import { View } from 'native-base';
 
 type Props = {
+  style?: StyleProp<ViewStyle>;
 };
 
-const LoadingPage: FunctionComponent<Props> = () => {
+const LoadingPage: FunctionComponent<Props> = ({style}) => {
 
   const spinAnimValue = useRef(new Animated.Value(0)).current;
   const spin = spinAnimValue.interpolate({
@@ -32,7 +33,7 @@ const LoadingPage: FunctionComponent<Props> = () => {
     )).start();
   });
   return(
-    <ShrinkAnimationView style={{backgroundColor: DIM_WHITE_COLOR}}>
+    <ShrinkAnimationView style={[{backgroundColor: DIM_WHITE_COLOR}, style]}>
       <StatusBar backgroundColor={DIM_WHITE_COLOR}/>
       <View style={{backgroundColor: DIM_WHITE_COLOR, flexDirection: 'row', minWidth: 100, justifyContent: 'center', alignItems: 'center'}}>
         <Animated.Image
