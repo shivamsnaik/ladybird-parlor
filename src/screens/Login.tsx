@@ -6,7 +6,6 @@ import { OXFORD_BLUE_COLOR } from '../constants/constants';
 import FadeAnimationView from '../animations/FadeAnimationView';
 import LoadingPage from './LoadingPage';
 import { Overlay } from 'react-native-elements';
-
 type Props = {};
 
 const Login: FunctionComponent<Props> = () => {

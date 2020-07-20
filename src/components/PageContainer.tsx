@@ -5,8 +5,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 import { AuthContext } from '../security/UserLogin';
 import { logoutUser } from '../api/AuthenticationApi';
-import { Container, Header, Left, Button, Icon, Title, Body, Right, Text } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Container, Header, Left, Button, Icon, Title, Body, Right, Text, View } from 'native-base';
 type Props = {
   headerTitle: string;
   children?: ReactChild;
@@ -36,9 +35,9 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
           </Button>
         </Right>
       </Header>
-      <ScrollView>
+      <View style={{flex: 1}}>
         {children}
-      </ScrollView>
+      </View>
     </Container>
   );
 };

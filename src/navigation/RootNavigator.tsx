@@ -59,7 +59,7 @@ const RootNavigator: FunctionComponent = () => {
           user.isAuthenticated === false ?
             <Login/>
           :
-          <Drawer.Navigator>
+          <Drawer.Navigator openByDefault={false}>
             <Drawer.Screen name='Home' component={BottomTab}/>
           </Drawer.Navigator>
         }
