@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { MAIN_COLOR, TEXT_COLOR } from '../constants/constants';
+import { MAIN_COLOR, TEXT_COLOR, SECONDARY_COLOR } from '../constants/constants';
 import BottomTab from './Tabs/BottomTab';
 import Login from '../screens/Login';
 import { Reducer } from '../config/StateConfig';
@@ -45,9 +45,11 @@ const RootNavigator: FunctionComponent = () => {
             colors: {
               ...DefaultTheme.colors,
               card: MAIN_COLOR,
-              primary: TEXT_COLOR,
+              primary: SECONDARY_COLOR,
               text: TEXT_COLOR,
+              border: SECONDARY_COLOR,
             },
+            dark: true,
           }
         }
       >

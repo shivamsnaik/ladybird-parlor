@@ -22,7 +22,7 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
       <Header androidStatusBarColor={MAIN_COLOR} style={{backgroundColor: MAIN_COLOR}}>
         <StatusBar barStyle='dark-content' backgroundColor={MAIN_COLOR}/>
         <Left>
-          <Button style={{backgroundColor: SECONDARY_COLOR}} transparent onPress={() => drawerNavigation?.toggleDrawer()}>
+          <Button style={{backgroundColor: SECONDARY_COLOR, borderRadius: 10}} transparent onPress={() => drawerNavigation?.toggleDrawer()}>
             <Icon name='menu' style={{color: ICON_COLOR}}/>
           </Button>
         </Left>
