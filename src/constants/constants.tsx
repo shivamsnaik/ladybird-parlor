@@ -29,8 +29,8 @@ export const ORANGE_COLOR='#FFD1A7';
 
 // VARIABLES
 export const MAIN_FONT_SIZE = 20;
-export const SECONDARY_FONT_SIZE = 15;
-export const TERTIARY_FONT_SIZE = 10;
+export const SECONDARY_FONT_SIZE = 18;
+export const TERTIARY_FONT_SIZE = 16;
 
 // CARD COLORS
 export const CARD_COLOR_1 = '#58A3E8';

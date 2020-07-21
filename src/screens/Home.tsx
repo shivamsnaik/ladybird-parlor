@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import PagePureContainer from '../components/PageContainer';
-import { Text, Card, CardItem, Body, View } from 'native-base';
+import { Text, Card, CardItem, View, Button } from 'native-base';
 import FadeAnimationView from '../animations/FadeAnimationView';
-import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, TERTIARY_COLOR, CARD_COLOR_1, CARD_COLOR_2, CARD_COLOR_3, CARD_COLOR_4, CARD_COLOR_5, CARD_COLOR_6, TEXT_COLOR_INVERSE, MAIN_FONT_SIZE } from '../constants/constants';
+import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, TERTIARY_COLOR, CARD_COLOR_1, CARD_COLOR_2, CARD_COLOR_3, CARD_COLOR_4, CARD_COLOR_5, CARD_COLOR_6, TEXT_COLOR_INVERSE, MAIN_FONT_SIZE, BLACK_COLOR, SECONDARY_FONT_SIZE } from '../constants/constants';
 import { StyleSheet, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Carousel } from '../components/Carousel';
@@ -14,6 +14,7 @@ interface Props{
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const Home: FunctionComponent<Props> = ({navigation}) => {
+
   return(
     <FadeAnimationView style={{flex: 1, backgroundColor: SECONDARY_COLOR}}>
       <PagePureContainer headerTitle='Home' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
@@ -22,64 +23,29 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Text style={{fontSize: 25}}>Hi, User</Text>
           </View>
           <Carousel snapToInterval={SCREEN_WIDTH - 45} centerContent showsHorizontalScrollIndicator={false}>
-            <Card style={[{borderRadius: 20}, Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_1}]}>
-                <Body>
-                  <Text style={[Style.text]}>
-                    Eyebrows
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_2}]}>
-                <Body>
-                  <Text style={[Style.text]}>
-                    Waxing
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_3}]}>
-                <Body>
-                  <Text style={[Style.text]}>
-                    Facial
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_4}]}>
-                <Body>
-                  <Text style={[Style.text]}>
-                    Parlor 4
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_5}]}>
-                <Body style={{borderRadius: 10}}>
-                  <Text style={[Style.text]}>
-                    Parlor 5
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem, {backgroundColor: CARD_COLOR_6}]}>
-                <Body>
-                  <Text style={[Style.text]}>
-                    Parlor 6
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
+            {
+              CarouselContents.map((content, index) => {
+                return (
+                  <Card
+                    key={index}
+                    style={[Style.card, {backgroundColor:  content.cardColor}]}
+                    accessibilityComponentType='button'
+                    accessibilityHint='HELLOWORLD'
+                  >
+                    <CardItem accessibilityComponentType='button' style={[Style.cardItem, {flexDirection: 'column', backgroundColor: 'transparent'}]}>
+                      <Text style={{ color: TEXT_COLOR, elevation: 10, minHeight: MAIN_FONT_SIZE + 10 , flex: 1, width: '100%', backgroundColor: MAIN_COLOR, padding: 10, fontSize: MAIN_FONT_SIZE}}>
+                        {content.name}
+                      </Text>
+                      <Button style={[Style.button, {height: Style.card.height}]} onPress={() => console.log('button pressed', index)}>
+                        <Text style={[Style.text]}>
+                          {content.name}
+                        </Text>
+                      </Button>
+                    </CardItem>
+                  </Card>
+                );
+              })
+            }
           </Carousel>
         </ScrollView>
       </PagePureContainer>
@@ -91,21 +57,41 @@ const Style = StyleSheet.create({
   card: {
     width: SCREEN_WIDTH - 50,
     borderRadius: 5,
+    height: 200,
   },
   cardItem: {
+    flex: 1,
     backgroundColor: MAIN_COLOR,
     borderRadius: 5,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
   },
-  headerText: {
-    color: TEXT_COLOR,
+  button: {
+    flex: 10,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    elevation: 0,
   },
   text: {
+    textAlign: 'center',
     color: TEXT_COLOR_INVERSE,
     flex: 1,
-    alignSelf: 'center',
-    height: 200,
-    fontSize: MAIN_FONT_SIZE + 2,
-    textAlignVertical: 'center',
+    fontSize: SECONDARY_FONT_SIZE,
+    textTransform: 'capitalize',
   },
 });
+
+const CarouselContents = [
+  {name: 'Eyebrow', cardColor: CARD_COLOR_1},
+  {name: 'Waxing', cardColor: CARD_COLOR_2},
+  {name: 'Facial', cardColor: CARD_COLOR_3},
+  {name: 'Parlor Item 4', cardColor: CARD_COLOR_4},
+  {name: 'Parlor Item 5', cardColor: CARD_COLOR_5},
+  {name: 'Parlor Item 6', cardColor: CARD_COLOR_6},
+];
 export default Home;
