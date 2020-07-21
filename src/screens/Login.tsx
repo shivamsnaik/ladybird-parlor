@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { AuthContext } from '../security/UserLogin';
 import { loginUser } from '../api/AuthenticationApi';
 import { Container, Header, Form, Item, Label, Input, Text, Button, Body, Title, Toast, Root } from 'native-base';
-import { OXFORD_BLUE_COLOR } from '../constants/constants';
+import { SECONDARY_COLOR } from '../constants/constants';
 import FadeAnimationView from '../animations/FadeAnimationView';
 import LoadingPage from './LoadingPage';
 import { Overlay } from 'react-native-elements';
@@ -46,7 +46,7 @@ const Login: FunctionComponent<Props> = () => {
       <FadeAnimationView animationParams={{duration: 100, toValue: 1, useNativeDriver: true}} style={{zIndex: 1, flex: 1}}>
         <Root>
           <Container>
-            <Header androidStatusBarColor={OXFORD_BLUE_COLOR} style={{backgroundColor: OXFORD_BLUE_COLOR}}>
+            <Header style={{backgroundColor: SECONDARY_COLOR}} androidStatusBarColor={SECONDARY_COLOR}>
               <Body style={{flex: 1, alignItems: 'center'}}>
                 <Title>Login</Title>
               </Body>
@@ -73,7 +73,7 @@ const Login: FunctionComponent<Props> = () => {
                   />
                 </Item>
                 <Button
-                  style={{margin: 30, justifyContent: 'center', backgroundColor: OXFORD_BLUE_COLOR}}
+                  style={{margin: 30, justifyContent: 'center', backgroundColor: SECONDARY_COLOR}}
                   onPress={() => {
                     console.log(email + password);
                     if (email.length === 0 || password.length === 0) {

@@ -4,7 +4,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import PagePureContainer from '../components/PageContainer';
 import { Text, Card, CardItem, Body, View } from 'native-base';
 import FadeAnimationView from '../animations/FadeAnimationView';
-import { OXFORD_BLUE_COLOR, DIM_WHITE_COLOR } from '../constants/constants';
+import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR } from '../constants/constants';
 import { StyleSheet, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Carousel } from '../components/Carousel';
@@ -15,8 +15,8 @@ interface Props{
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const Home: FunctionComponent<Props> = ({navigation}) => {
   return(
-    <FadeAnimationView style={{flex: 1, backgroundColor: OXFORD_BLUE_COLOR}}>
-      <PagePureContainer headerTitle='Home' drawerNavigation={navigation}>
+    <FadeAnimationView style={{flex: 1, backgroundColor: SECONDARY_COLOR}}>
+      <PagePureContainer headerTitle='Home' drawerNavigation={navigation} style={{backgroundColor: SECONDARY_COLOR}}>
         <ScrollView contentContainerStyle={{margin: 10}}>
           <View>
             <Text style={{fontSize: 25}}>Hi, User</Text>
@@ -25,7 +25,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Card style={[Style.card]}>
               <CardItem style={[Style.cardItem]}>
                 <Body>
-                  <Text style={{flex: 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
+                  <Text style={[Style.text]}>
                     Helloworld
                   </Text>
                 </Body>
@@ -34,17 +34,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Card style={[Style.card]}>
               <CardItem style={[Style.cardItem]}>
                 <Body>
-                  <Text style={{flex: 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
-                    Helloworld
-                  </Text>
-                </Body>
-              </CardItem>
-            </Card>
-
-            <Card style={[Style.card]}>
-              <CardItem style={[Style.cardItem]}>
-                <Body>
-                  <Text style={{flex : 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
+                  <Text style={[Style.text]}>
                     Helloworld
                   </Text>
                 </Body>
@@ -54,7 +44,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Card style={[Style.card]}>
               <CardItem style={[Style.cardItem]}>
                 <Body>
-                  <Text style={{flex: 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
+                  <Text style={[Style.text]}>
                     Helloworld
                   </Text>
                 </Body>
@@ -64,7 +54,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Card style={[Style.card]}>
               <CardItem style={[Style.cardItem]}>
                 <Body>
-                  <Text style={{flex: 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
+                  <Text style={[Style.text]}>
                     Helloworld
                   </Text>
                 </Body>
@@ -74,7 +64,17 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
             <Card style={[Style.card]}>
               <CardItem style={[Style.cardItem]}>
                 <Body>
-                  <Text style={{flex: 1, alignSelf: 'center', height: 200, textAlignVertical: 'center'}}>
+                  <Text style={[Style.text]}>
+                    Helloworld
+                  </Text>
+                </Body>
+              </CardItem>
+            </Card>
+
+            <Card style={[Style.card]}>
+              <CardItem style={[Style.cardItem]}>
+                <Body>
+                  <Text style={[]}>
                     Helloworld
                   </Text>
                 </Body>
@@ -92,10 +92,17 @@ const Style = StyleSheet.create({
     width: SCREEN_WIDTH - 50,
   },
   cardItem: {
-    backgroundColor: OXFORD_BLUE_COLOR,
+    backgroundColor: MAIN_COLOR,
+  },
+  headerText: {
+    color: TEXT_COLOR,
   },
   text: {
-    color: DIM_WHITE_COLOR,
+    color: TEXT_COLOR,
+    flex: 1,
+    alignSelf: 'center',
+    height: 200,
+    textAlignVertical: 'center',
   },
 });
 export default Home;

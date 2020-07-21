@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useRef, useEffect } from 'react';
-import {Animated, Easing, StatusBar, StyleProp, ViewStyle} from 'react-native';
-import { DIM_WHITE_COLOR, BLUE_COLOR } from '../constants/constants';
+import {Animated, Easing, StyleProp, ViewStyle} from 'react-native';
+import { DIM_WHITE_COLOR, LOADER_COLOR } from '../constants/constants';
 import ShrinkAnimationView from '../animations/ShrinkAnimationView';
 import { View } from 'native-base';
 
@@ -34,10 +34,9 @@ const LoadingPage: FunctionComponent<Props> = ({style}) => {
   });
   return(
     <ShrinkAnimationView style={[{backgroundColor: DIM_WHITE_COLOR}, style]}>
-      <StatusBar backgroundColor={DIM_WHITE_COLOR}/>
       <View style={{backgroundColor: DIM_WHITE_COLOR, flexDirection: 'row', minWidth: 100, justifyContent: 'center', alignItems: 'center'}}>
         <Animated.Image
-          style={{ tintColor: BLUE_COLOR , overlayColor: 'transparent', height: 150, width: 150, transform: [{rotate: spin}] }}
+          style={{ tintColor: LOADER_COLOR , overlayColor: 'transparent', height: 150, width: 150, transform: [{rotate: spin}] }}
           source={require('../assets/icons/fidget.png')}
         />
       </View>

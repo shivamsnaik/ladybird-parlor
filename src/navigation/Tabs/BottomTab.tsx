@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
-import { HINT_OF_READ_COLOR, RED_COLOR, DIM_WHITE_COLOR } from '../../constants/constants';
+import { DIM_WHITE_COLOR, TEXT_COLOR, SECONDARY_COLOR, MAIN_COLOR } from '../../constants/constants';
 import Home from '../../screens/Home';
 import Appointments from '../../screens/Appointments';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Tab = createBottomTabNavigator();
-const BottomTab: FunctionComponent<Props> = ({navigation}) => {
+const BottomTab: FunctionComponent<Props> = () => {
   return(
     <Tab.Navigator
       backBehavior='initialRoute'
@@ -40,9 +40,12 @@ const BottomTab: FunctionComponent<Props> = ({navigation}) => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: RED_COLOR,
-        inactiveTintColor: HINT_OF_READ_COLOR,
-        activeBackgroundColor: DIM_WHITE_COLOR,
+        activeTintColor: MAIN_COLOR,
+        inactiveTintColor: SECONDARY_COLOR,
+        labelPosition: 'beside-icon',
+        labelStyle: {color: TEXT_COLOR},
+        tabStyle: {borderTopLeftRadius: 20, borderTopRightRadius: 20},
+        activeBackgroundColor: SECONDARY_COLOR,
         style: {borderTopColor: DIM_WHITE_COLOR, borderTopWidth: 0},
       }}
     >
