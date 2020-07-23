@@ -21,13 +21,13 @@ const RootNavigator: FunctionComponent = () => {
     }
 
     // CHECK IF USER IS ALREADY LOGGED IN
-    AsyncStorage.getItem('email')
+    AsyncStorage.getItem('user')
     .then((value) => {
-      if (value === null) { setLoadingParams({...loadingParams, isLoading: false}); }
       console.log('ROOT NAVIGATOR: ' + value);
-      AsyncStorage.getItem('uid').then((uidValue) => {
-        if (value !== null) dispatch({type: 'LOGGED_IN', payload: {email: value, uid: uidValue}});
-      });
+      if (value === null) { setLoadingParams({...loadingParams, isLoading: false}); }
+      else {
+        dispatch({type: 'LOGGED_IN', payload: value});
+      }
     })
     .catch((e) => {
       console.log('ROOT NAVIGATOR ERROR: ' + e);
