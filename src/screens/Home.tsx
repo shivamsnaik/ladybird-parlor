@@ -15,7 +15,10 @@ interface Props{
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const Home: FunctionComponent<Props> = ({navigation}) => {
+  //#region Variable declarations
   const userContext = useContext(AuthContext);
+  //#endregion
+
   useEffect(() => {
   }, [userContext.user.profile]);
 

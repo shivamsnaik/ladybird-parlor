@@ -40,13 +40,6 @@ export const updateUserProfile = () => {
 };
 //#endregion
 
-//#region Appointment page APIs
-export const addAppointment = (uid: any, date: string) => {
-
-};
-
-//#endregion
-
 //#region Helping functions for Authentication APIS
 export const createUserJSONObject = async (user: any) => {
   const userJSON = {

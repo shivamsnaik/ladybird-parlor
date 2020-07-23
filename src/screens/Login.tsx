@@ -17,6 +17,7 @@ const Login: FunctionComponent<Props> = () => {
 
   });
 
+  //#region Component functions
   const handleUnsuccessfulLogin = (error: any) => {
     setLoading(false);
     let errorMessage = 'Some error occured. Try again Later';
@@ -34,6 +35,7 @@ const Login: FunctionComponent<Props> = () => {
       type: 'danger',
     });
   };
+  //#endregion
 
   return(
     <>
