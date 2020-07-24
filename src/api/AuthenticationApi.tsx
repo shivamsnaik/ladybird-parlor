@@ -1,6 +1,8 @@
-import auth from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 //#region USER session APIs
+
+//#region Email login APIs
 export const loginUser: any = async (email: string, pwd: string, dispatch: any, callback?: any) => {
   auth()
   .signInWithEmailAndPassword(email, pwd)
@@ -16,7 +18,33 @@ export const loginUser: any = async (email: string, pwd: string, dispatch: any, 
     callback(error);
   });
 };
+//#endregion
 
+//#region Phone Login APIs
+export const loginWithPhoneNumber = async (password: string, callback: Function, resendMessage: boolean = false) => {
+  try {
+    const confirmation = await auth().signInWithPhoneNumber(password, resendMessage);
+    return confirmation;
+  }catch (e) {
+    console.log('loginWithPhoneNumber: ', e);
+    callback(e);
+  }
+};
+
+export const confirmPhoneNumberAuthCode =
+async (authObject: FirebaseAuthTypes.ConfirmationResult , authCode: string, dispatch: any, callback: Function) => {
+  try {
+    const success = await authObject.confirm(authCode);
+    createUserJSONObject(success?.user)
+    .then((userJSON) => {
+      dispatch({type: 'LOGIN', payload: userJSON});
+    });
+  }catch (e) {
+    console.log('confirmPhoneNumberAuthCode: ', e);
+    callback(e);
+  }
+};
+//#endregion
 export const logoutUser = (dispatch: any) => {
   auth()
     .signOut()

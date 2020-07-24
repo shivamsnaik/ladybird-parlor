@@ -36,6 +36,7 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
     <PagePureContainer headerTitle='Appointments' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
       <ScrollView contentContainerStyle={{margin: 10}}>
         {
+          appointmentData !== null ?
           appointmentData.map((value, index) => {
             return (
               <View key={index} style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -44,6 +45,10 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
               </View>
             );
           })
+          :
+          <View>
+            <Text>No appointments for now.</Text>
+          </View>
         }
       </ScrollView>
     </PagePureContainer>

@@ -27,7 +27,10 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
       <PagePureContainer headerTitle='Home' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
         <ScrollView contentContainerStyle={{margin: 10}}>
           <View style={{backgroundColor: MAIN_COLOR, padding: 10, borderRadius: 10, marginBottom: 10}}>
-            <Text style={{fontSize: 25, textAlign: 'justify'}}>Hello {userContext.user.profile.displayName.split(' ')[0]}, Whats up?</Text>
+            <Text style={{fontSize: 25, textAlign: 'justify'}}>
+              Hello { userContext.user.profile.displayName !== null
+              && userContext.user.profile.displayName.split(' ')[0]}, Whats up?
+            </Text>
           </View>
           <Carousel snapToInterval={SCREEN_WIDTH - 45} centerContent showsHorizontalScrollIndicator={false}>
             {
