@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useEffect, useContext, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import PagePureContainer from '../components/PageContainer';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { TERTIARY_COLOR } from '../constants/constants';
-import { Text, View } from 'native-base';
+import { TERTIARY_COLOR, SECONDARY_COLOR, MAIN_COLOR, MAIN_FONT_SIZE } from '../constants/constants';
+import { Text, View, List, ListItem } from 'native-base';
 import { subscribeAppointmentData, unsubscribeToAppointmentData } from '../api/AppointmentsApi';
 import { AuthContext } from '../security/UserLogin';
 import { Overlay } from 'react-native-elements';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Appointments: FunctionComponent<Props> = ({navigation}) => {
-  //#region Variable declarations
+  //#region States and Variable declarations
   const userContext = useContext(AuthContext);
   const [appointmentData, setAppoinmentData] = useState([] as any[]);
   const [loading, setLoading] = useState(true as boolean);
@@ -25,7 +25,7 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
     if (loading)
       setLoading(false);
     setAppoinmentData(snapshot.val());
-    console.log('APPOINTMENTS: ', appointmentData);
+    console.log('APPOINTMENTS UPDATES: ', snapshot.val());
   };
   //#endregion
 
@@ -46,17 +46,26 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
       </Overlay>
       }
       <PagePureContainer headerTitle='Appointments' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
-        <ScrollView contentContainerStyle={{margin: 10}}>
+        <ScrollView contentContainerStyle={{}}>
           {
             appointmentData !== null ?
-            appointmentData.map((value, index) => {
-              return (
-                <View key={index} style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text>{value.service}</Text>
-                  <Text>{(new Date(parseInt(value.timestamp) * 1000)).toLocaleString()}</Text>
-                </View>
-              );
-            })
+              <List style={{flex: 1}}>
+                {
+                  appointmentData.map((value, index) => {
+                    return (
+                      <ListItem
+                        key={index}
+                        style={Style.listItemStyle}
+                      >
+                        <Text style={[Style.titleStyle, {}]}>{value.service}</Text>
+                        <Text style={[Style.dateStyle]}>
+                          {(new Date(parseInt(value.timestamp) * 1000)).toLocaleString()}
+                        </Text>
+                      </ListItem>
+                    );
+                  })
+                }
+              </List>
             :
             <View>
               <Text>No appointments for now.</Text>
@@ -67,4 +76,25 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
     </>
   );
 };
+
+const Style = StyleSheet.create({
+  listItemStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    backgroundColor: SECONDARY_COLOR,
+    margin: 10,
+    padding: 10,
+    height: 100,
+    borderRadius: 25,
+  },
+  titleStyle: {
+    color: MAIN_COLOR,
+    fontSize: MAIN_FONT_SIZE,
+    textTransform: 'capitalize',
+  },
+  dateStyle: {
+    color: MAIN_COLOR,
+  },
+});
 export default Appointments;

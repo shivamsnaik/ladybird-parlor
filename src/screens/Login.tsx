@@ -48,9 +48,9 @@ const Login: FunctionComponent<Props> = () => {
     });
   };
 
-  const validatePhoneNumber = () => {
+  const validatePhoneNumber = (number: string) => {
     let validity = true;
-    if (phoneNumber.length < 10) {
+    if (number.length < 10) {
       Toast.show({
         text: 'Please enter a valid mobile number',
         buttonText: 'Okay',
@@ -99,7 +99,7 @@ const Login: FunctionComponent<Props> = () => {
                   <Item floatingLabel bordered>
                     <Label>Login Code</Label>
                     <Input
-                      autoCompleteType='password'
+                      autoCompleteType='off'
                       autoCapitalize='none'
                       secureTextEntry={true}
                       value={authCode}
