@@ -7,6 +7,8 @@ import { TERTIARY_COLOR } from '../constants/constants';
 import { Text, View } from 'native-base';
 import { subscribeAppointmentData, unsubscribeToAppointmentData } from '../api/AppointmentsApi';
 import { AuthContext } from '../security/UserLogin';
+import { Overlay } from 'react-native-elements';
+import LoadingPage from './LoadingPage';
 type Props = {
   navigation: DrawerNavigationProp<ParamListBase, 'Appointments'>;
 };
@@ -15,10 +17,13 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
   //#region Variable declarations
   const userContext = useContext(AuthContext);
   const [appointmentData, setAppoinmentData] = useState([] as any[]);
+  const [loading, setLoading] = useState(true as boolean);
   //#endregion
 
   //#region Component functions
   const stateChangeEventHandler = (snapshot: any) => {
+    if (loading)
+      setLoading(false);
     setAppoinmentData(snapshot.val());
     console.log('APPOINTMENTS: ', appointmentData);
   };
@@ -33,25 +38,33 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
   }, []);
 
   return(
-    <PagePureContainer headerTitle='Appointments' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
-      <ScrollView contentContainerStyle={{margin: 10}}>
-        {
-          appointmentData !== null ?
-          appointmentData.map((value, index) => {
-            return (
-              <View key={index} style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text>{value.service}</Text>
-                <Text>{(new Date(parseInt(value.timestamp) * 1000)).toLocaleString()}</Text>
-              </View>
-            );
-          })
-          :
-          <View>
-            <Text>No appointments for now.</Text>
-          </View>
-        }
-      </ScrollView>
-    </PagePureContainer>
+    <>
+    {
+      loading &&
+      <Overlay isVisible={loading} fullScreen>
+        <LoadingPage />
+      </Overlay>
+      }
+      <PagePureContainer headerTitle='Appointments' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
+        <ScrollView contentContainerStyle={{margin: 10}}>
+          {
+            appointmentData !== null ?
+            appointmentData.map((value, index) => {
+              return (
+                <View key={index} style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text>{value.service}</Text>
+                  <Text>{(new Date(parseInt(value.timestamp) * 1000)).toLocaleString()}</Text>
+                </View>
+              );
+            })
+            :
+            <View>
+              <Text>No appointments for now.</Text>
+            </View>
+          }
+        </ScrollView>
+      </PagePureContainer>
+    </>
   );
 };
 export default Appointments;
