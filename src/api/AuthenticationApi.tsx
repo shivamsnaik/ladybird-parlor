@@ -35,16 +35,13 @@ export const confirmPhoneNumberAuthCode =
 async (authObject: FirebaseAuthTypes.ConfirmationResult , authCode: string, dispatch: any, callback: Function) => {
   try {
     const success = await authObject.confirm(authCode);
-    createUserJSONObject(success?.user)
-    .then((userJSON) => {
-      dispatch({type: 'LOGIN', payload: userJSON});
-    });
+    dispatch({type: 'LOGIN', payload: success?.user});
   }catch (e) {
     console.log('confirmPhoneNumberAuthCode: ', e);
     callback(e);
   }
 };
-//#endregion
+
 export const logoutUser = (dispatch: any) => {
   auth()
     .signOut()
@@ -56,14 +53,17 @@ export const logoutUser = (dispatch: any) => {
       console.log('AUTH API: ' + error);
     });
 };
+//#endregion
 
-export const updateUserProfile = () => {
-  const update = {displayName: 'Shivam Naik'};
+//#region User Profile APIs
+export const updateUserProfile = (dispatch: any, name: string) => {
+  const update = {displayName: name};
   auth()
   .currentUser
   ?.updateProfile(update)
   .then(() => {
     console.log('AUTH API: Updated profile successfully');
+    dispatch({type: 'UPDATE_USER', payload: auth().currentUser});
   });
 };
 //#endregion

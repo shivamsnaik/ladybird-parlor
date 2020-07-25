@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { AuthContext } from '../security/UserLogin';
-import { loginUser, loginWithPhoneNumber, confirmPhoneNumberAuthCode } from '../api/AuthenticationApi';
+import { loginWithPhoneNumber, confirmPhoneNumberAuthCode } from '../api/AuthenticationApi';
 import { Container, Header, Form, Item, Label, Input, Text, Button, Body, Title, Toast, Root } from 'native-base';
 import { SECONDARY_COLOR } from '../constants/constants';
 import FadeAnimationView from '../animations/FadeAnimationView';
 import LoadingPage from './LoadingPage';
 import { Overlay } from 'react-native-elements';
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { auth } from '../config/FirebaseConfig';
 type Props = {};
 
 const Login: FunctionComponent<Props> = () => {
@@ -20,8 +20,13 @@ const Login: FunctionComponent<Props> = () => {
   //#endregion
 
   useEffect(() => {
-
-  });
+    auth().onAuthStateChanged((userObject) => {
+      if (userObject !== null) {
+        console.log(`LOGIN: AUTH CHANGE: ${JSON.stringify(userObject)}`);
+        dispatch({type: 'LOGIN', payload: userObject});
+      }
+    });
+  }, [auth().currentUser]);
 
   //#region Component functions
   const handleUnsuccessfulLogin = (error: any) => {
@@ -43,7 +48,7 @@ const Login: FunctionComponent<Props> = () => {
     });
   };
 
-  const validatePhoneNumber = (number: string) => {
+  const validatePhoneNumber = () => {
     let validity = true;
     if (phoneNumber.length < 10) {
       Toast.show({
@@ -98,6 +103,7 @@ const Login: FunctionComponent<Props> = () => {
                       autoCapitalize='none'
                       secureTextEntry={true}
                       value={authCode}
+                      maxLength={6}
                       onChangeText={(text) => setAuthCode(text)}
                     />
                   </Item>
@@ -111,7 +117,7 @@ const Login: FunctionComponent<Props> = () => {
                       if (validatePhoneNumber(phoneNumber)) {
                         loginWithPhoneNumber('+91' + phoneNumber, handleUnsuccessfulLogin)
                         .then((confirmation) => {
-                          console.log(confirmation);
+                          console.log(`LOGIN PAGE: CONFIRMATION RECEVIED`);
                           setLoginState('confirm');
                           setConfirmationResult(confirmation);
                         })

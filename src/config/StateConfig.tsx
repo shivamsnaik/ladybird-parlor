@@ -3,12 +3,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const Reducer = (state: any, action: any) => {
   switch (action.type){
     case 'LOGIN':
-      console.log('STATE CONFIG: ' + action.payload);
-      AsyncStorage.setItem('user', action.payload);
-      return {
+      return{
         ...state,
         isAuthenticated: true,
-        profile: JSON.parse(action.payload),
+        profile: action.payload,
       };
     case 'LOGOUT':
       AsyncStorage.clear();
@@ -17,11 +15,12 @@ export const Reducer = (state: any, action: any) => {
         isAuthenticated: false,
         profile: null,
       };
-    case 'LOGGED_IN':
+    case 'UPDATE_USER':
+      console.log('UPDATE USER REDUCER');
       return{
         ...state,
         isAuthenticated: true,
-        profile: JSON.parse(action.payload),
+        profile: action.payload,
       };
     default:
       return state;

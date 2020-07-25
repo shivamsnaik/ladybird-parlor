@@ -6,33 +6,33 @@ import BottomTab from './Tabs/BottomTab';
 import Login from '../screens/Login';
 import { Reducer } from '../config/StateConfig';
 import { InitialUserState, AuthContext } from '../security/UserLogin';
-import AsyncStorage from '@react-native-community/async-storage';
 import LoadingPage from '../screens/LoadingPage';
 
 const Drawer = createDrawerNavigator();
 const RootNavigator: FunctionComponent = () => {
   const [user, dispatch] = React.useReducer(Reducer, InitialUserState);
-  const [loadingParams, setLoadingParams] = useState({isLoading: true});
+  const [loadingParams, setLoadingParams] = useState({isLoading: false});
 
   useEffect(() => {
+
     if (user.isAuthenticated) {
       setLoadingParams({...loadingParams, isLoading: false});
       return;
     }
 
     // CHECK IF USER IS ALREADY LOGGED IN
-    AsyncStorage.getItem('user')
-    .then((value) => {
-      console.log('ROOT NAVIGATOR: ' + value);
-      if (value === null) { setLoadingParams({...loadingParams, isLoading: false}); }
-      else {
-        dispatch({type: 'LOGGED_IN', payload: value});
-      }
-    })
-    .catch((e) => {
-      console.log('ROOT NAVIGATOR ERROR: ' + e);
-      setLoadingParams({...loadingParams, isLoading: false});
-    });
+    // AsyncStorage.getItem('user')
+    // .then((value) => {
+    //   console.log('ROOT NAVIGATOR: ' + value);
+    //   if (value === null) { setLoadingParams({...loadingParams, isLoading: false}); }
+    //   else {
+    //     dispatch({type: 'LOGGED_IN', payload: value});
+    //   }
+    // })
+    // .catch((e) => {
+    //   console.log('ROOT NAVIGATOR ERROR: ' + e);
+    //   setLoadingParams({...loadingParams, isLoading: false});
+    // });
   }, [user.isAuthenticated, loadingParams.isLoading]);
 
   return (

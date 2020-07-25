@@ -9,6 +9,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Carousel } from '../components/Carousel';
 import { AuthContext } from '../security/UserLogin';
+import UpdateProfile from './UpdateProfile';
 interface Props{
   navigation: DrawerNavigationProp<ParamListBase, 'Home'>;
 }
@@ -26,34 +27,41 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
     <FadeAnimationView style={{flex: 1, backgroundColor: SECONDARY_COLOR}}>
       <PagePureContainer headerTitle='Home' drawerNavigation={navigation} style={{backgroundColor: TERTIARY_COLOR}}>
         <ScrollView contentContainerStyle={{margin: 10}}>
-          <View style={{backgroundColor: MAIN_COLOR, padding: 10, borderRadius: 10, marginBottom: 10}}>
-            <Text style={{fontSize: 25, textAlign: 'justify'}}>
-              Hello { userContext.user.profile.displayName !== null
-              && userContext.user.profile.displayName.split(' ')[0]}, Whats up?
-            </Text>
-          </View>
-          <Carousel snapToInterval={SCREEN_WIDTH - 45} centerContent showsHorizontalScrollIndicator={false}>
-            {
-              CarouselContents.map((content, index) => {
-                return (
-                  <Card
-                    key={index}
-                    style={[Style.card, {backgroundColor:  content.cardColor}]}
-                    accessibilityComponentType='button'
-                    accessibilityHint='HELLOWORLD'
-                  >
-                    <CardItem accessibilityComponentType='button' style={[Style.cardItem, {flexDirection: 'column', backgroundColor: 'transparent'}]}>
-                      <Button style={[Style.button, {height: Style.card.height}]} onPress={() => console.log('button pressed', index)}>
-                        <Text style={[Style.text]}>
-                          {content.name}
-                        </Text>
-                      </Button>
-                    </CardItem>
-                  </Card>
-                );
-              })
-            }
-          </Carousel>
+          {
+          userContext.user.profile.displayName === null ?
+            <UpdateProfile context={userContext}/>
+          :
+          <>
+            <View style={{backgroundColor: MAIN_COLOR, padding: 10, borderRadius: 10, marginBottom: 10}}>
+              <Text style={{fontSize: 25, textAlign: 'justify'}}>
+                {console.log(`HOME PAGE: ${JSON.stringify(userContext.user.profile)}`)}
+                Hello {userContext.user.profile.displayName.split(' ')[0]}, Whats up?
+              </Text>
+            </View>
+            <Carousel snapToInterval={SCREEN_WIDTH - 45} centerContent showsHorizontalScrollIndicator={false}>
+              {
+                CarouselContents.map((content, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      style={[Style.card, {backgroundColor:  content.cardColor}]}
+                      accessibilityComponentType='button'
+                      accessibilityHint='HELLOWORLD'
+                    >
+                      <CardItem accessibilityComponentType='button' style={[Style.cardItem, {flexDirection: 'column', backgroundColor: 'transparent'}]}>
+                        <Button style={[Style.button, {height: Style.card.height}]} onPress={() => console.log('button pressed', index)}>
+                          <Text style={[Style.text]}>
+                            {content.name}
+                          </Text>
+                        </Button>
+                      </CardItem>
+                    </Card>
+                  );
+                })
+              }
+            </Carousel>
+          </>
+          }
         </ScrollView>
       </PagePureContainer>
     </FadeAnimationView>
