@@ -51,15 +51,15 @@ const Appointments: FunctionComponent<Props> = ({navigation}) => {
             appointmentData !== null ?
               <List style={{flex: 1}}>
                 {
-                  appointmentData.map((value, index) => {
+                  Object.keys(appointmentData).map((value: any, index: any) => {
                     return (
                       <ListItem
                         key={index}
                         style={Style.listItemStyle}
                       >
-                        <Text style={[Style.titleStyle, {}]}>{value.service}</Text>
+                        <Text style={[Style.titleStyle, {}]}>{appointmentData[value].service}</Text>
                         <Text style={[Style.dateStyle]}>
-                          {(new Date(parseInt(value.timestamp) * 1000)).toLocaleString()}
+                          {(new Date(parseInt(value) * 1000)).toLocaleString()}
                         </Text>
                       </ListItem>
                     );

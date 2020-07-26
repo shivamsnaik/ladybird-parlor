@@ -4,7 +4,10 @@ import database from '@react-native-firebase/database';
 export const subscribeAppointmentData = (uid: string, callback: any) => {
   return database()
   .ref(`appointments/${uid}`)
-  .on('value', (snapshot: any) => callback(snapshot));
+  .orderByKey()
+  .on('value', (snapshot: any) => {
+    callback(snapshot);
+  });
 };
 
 export const unsubscribeToAppointmentData = (uid: string, appointmentRef: any) => {
