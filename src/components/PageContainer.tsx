@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactChild, useEffect } from 'react';
 import { ViewStyle, StyleProp, StatusBar } from 'react-native';
-import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, ICON_COLOR, MAIN_FONT_SIZE, ICON_COLOR_INVERSE } from '../constants/constants';
+import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, ICON_COLOR, ICON_COLOR_INVERSE, TITLE_FONT_SIZE } from '../constants/constants';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 import { AuthContext } from '../security/UserLogin';
@@ -27,7 +27,7 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
           </Button>
         </Left>
         <Body>
-          <Title style={{color: TEXT_COLOR, fontSize: MAIN_FONT_SIZE}}>{headerTitle}</Title>
+          <Title style={{color: TEXT_COLOR, fontSize: TITLE_FONT_SIZE}}>{headerTitle}</Title>
         </Body>
         <Right>
           <Button transparent onPress={() => {console.log('LOGOUT PRESSED'); logoutUser(dispatch); }}>

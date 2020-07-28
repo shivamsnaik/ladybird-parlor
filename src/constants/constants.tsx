@@ -28,8 +28,9 @@ export const DIM_WHITE_COLOR='#FFFFFF';
 export const ORANGE_COLOR='#FFD1A7';
 
 // VARIABLES
-export const MAIN_FONT_SIZE = 20;
-export const SECONDARY_FONT_SIZE = 18;
+export const TITLE_FONT_SIZE = 20;
+export const MAIN_FONT_SIZE = 28;
+export const SECONDARY_FONT_SIZE = 22;
 export const TERTIARY_FONT_SIZE = 16;
 
 // CARD COLORS
