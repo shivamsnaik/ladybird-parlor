@@ -9,6 +9,8 @@ import {
   TERTIARY_COLOR, TEXT_COLOR_INVERSE,
   SECONDARY_FONT_SIZE, TERTIARY_FONT_SIZE,
   TEXT_COLOR,
+  TERTIARY_BORDER_RADIUS,
+  FontFamily,
 } from '../constants/constants';
 import { StyleSheet, Dimensions, FlatList } from 'react-native';
 import { ScrollView } from 'react-native';
@@ -61,9 +63,9 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
           :
           <>
             <View style={{backgroundColor: MAIN_COLOR, padding: 10, marginBottom: 10}}>
-              <Text style={{fontSize: 28, textAlign: 'center', fontWeight: 'bold'}}>
+              <Text style={{fontSize: 28, textAlign: 'center', fontFamily: FontFamily}}>
                 {console.log(`HOME PAGE: ${JSON.stringify(userContext.user.profile)}`)}
-                Hi <Text style={{color: SECONDARY_COLOR, fontSize: 28}}>
+                Hi <Text style={{color: SECONDARY_COLOR, fontSize: 28, fontFamily: FontFamily}}>
                   {userContext.user.profile.displayName.split(' ')[0]}</Text>
                 ,
               </Text>
@@ -83,14 +85,14 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                     return (
                       <Card
                         key={index}
-                        style={[Style.card, {backgroundColor: SECONDARY_COLOR}]}
+                        style={[Style.card, {backgroundColor: MAIN_COLOR}]}
                         accessibilityComponentType='button'
                         accessibilityHint='HELLOWORLD'
                       >
                         <CardItem
                           accessibilityComponentType='button'
                           style={[Style.cardItem, {
-                            borderColor: MAIN_COLOR, borderWidth: 2.0, borderStyle: 'solid',
+                            borderColor: MAIN_COLOR, borderWidth: 0, borderStyle: 'solid',
                             flexDirection: 'column', backgroundColor: 'transparent',
                           }]}
                         >
@@ -98,7 +100,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                             style={[Style.button, {height: Style.card.height}]}
                             onPress={() => console.log('button pressed', index)}
                           >
-                            <Text style={[Style.text, {color: MAIN_COLOR}]}>
+                            <Text style={[Style.text, {color: SECONDARY_COLOR}]}>
                               {content.name}
                             </Text>
                           </Button>
@@ -172,7 +174,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                         style={[Style.card, {
                           backgroundColor: MAIN_COLOR,
                           maxHeight: 80,
-                          borderRadius: 20,
+                          borderRadius: TERTIARY_BORDER_RADIUS,
                         }]}
                         accessibilityComponentType='button'
                         accessibilityHint='HELLOWORLD'
@@ -196,7 +198,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                               style={[Style.text, {
                                 fontSize: TERTIARY_FONT_SIZE,
                                 color: TEXT_COLOR,
-                                fontWeight: 'bold',
+                                fontFamily: FontFamily,
                               }]}
                             >
                               {item.service}
@@ -205,7 +207,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                               style={[Style.text, {
                                 fontSize: TERTIARY_FONT_SIZE,
                                 color: SECONDARY_COLOR,
-                                fontWeight: '700',
+                                fontFamily: FontFamily,
                               }]}
                             >
                               {item.price}₹
@@ -229,13 +231,13 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
 const Style = StyleSheet.create({
   card: {
     width: SCREEN_WIDTH - 50,
-    borderRadius: 5,
+    borderRadius: TERTIARY_BORDER_RADIUS,
     height: 200,
   },
   cardItem: {
     flex: 1,
     backgroundColor: MAIN_COLOR,
-    borderRadius: 5,
+    borderRadius: TERTIARY_BORDER_RADIUS,
     paddingTop: 0,
     paddingBottom: 0,
     paddingLeft: 0,
@@ -245,7 +247,7 @@ const Style = StyleSheet.create({
     flex: 10,
     backgroundColor: 'transparent',
     borderWidth: 0,
-    borderRadius: 0,
+    borderRadius: TERTIARY_BORDER_RADIUS,
     paddingTop: 0,
     paddingBottom: 0,
     elevation: 0,
@@ -256,13 +258,13 @@ const Style = StyleSheet.create({
     flex: 1,
     fontSize: SECONDARY_FONT_SIZE,
     textTransform: 'capitalize',
-    fontWeight: '700',
+    fontFamily: FontFamily,
   },
 
   headingText: {
     fontSize: SECONDARY_FONT_SIZE,
-    fontWeight: '600',
     margin: 10,
+    fontFamily: FontFamily,
   },
 });
 
