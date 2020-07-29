@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import PagePureContainer from '../components/PageContainer';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { TERTIARY_COLOR, SECONDARY_COLOR, MAIN_COLOR, MAIN_FONT_SIZE, FontFamily } from '../constants/constants';
+import { TERTIARY_COLOR, SECONDARY_COLOR, MAIN_COLOR, MAIN_FONT_SIZE, FontFamily, TERTIARY_BORDER_RADIUS } from '../constants/constants';
 import { Text, View, List, ListItem } from 'native-base';
 import { subscribeAppointmentData, unsubscribeToAppointmentData } from '../api/AppointmentsApi';
 import { AuthContext } from '../security/UserLogin';
@@ -86,7 +86,7 @@ const Style = StyleSheet.create({
     margin: 10,
     padding: 10,
     height: 100,
-    borderRadius: 25,
+    borderRadius: TERTIARY_BORDER_RADIUS,
   },
   titleStyle: {
     color: MAIN_COLOR,

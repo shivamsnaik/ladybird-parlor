@@ -2,10 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
-import { DIM_WHITE_COLOR, TEXT_COLOR, SECONDARY_COLOR, MAIN_COLOR, FontFamily, PRIMARY_BORDER_RADIUS } from '../../constants/constants';
+import { DIM_WHITE_COLOR, SECONDARY_COLOR, MAIN_COLOR, FontFamily } from '../../constants/constants';
 import Home from '../../screens/Home';
 import Appointments from '../../screens/Appointments';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import Rates from '../../screens/Rates';
 
 type Props = {
   navigation: NavigationProp<ParamListBase>;
@@ -52,7 +53,7 @@ const BottomTab: FunctionComponent<Props> = () => {
     >
       <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Appointments' component={Appointments}/>
-      <Tab.Screen name='Rates' component={Home}/>
+      <Tab.Screen name='Rates' component={Rates}/>
     </Tab.Navigator>
   );
 };
