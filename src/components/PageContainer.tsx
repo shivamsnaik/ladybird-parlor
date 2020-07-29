@@ -23,7 +23,7 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
         <StatusBar barStyle='dark-content' backgroundColor={MAIN_COLOR}/>
         <Left>
           <Button style={{backgroundColor: SECONDARY_COLOR, borderRadius: 10}} transparent onPress={() => drawerNavigation?.toggleDrawer()}>
-            <Icon name='menu' style={{color: ICON_COLOR}}/>
+            <Icon name='menu' type='Entypo' style={{color: ICON_COLOR}}/>
           </Button>
         </Left>
         <Body>
@@ -31,8 +31,8 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
         </Body>
         <Right>
           <Button transparent onPress={() => {console.log('LOGOUT PRESSED'); logoutUser(dispatch); }}>
-            <Text style={{color: TEXT_COLOR, textTransform: 'capitalize', fontSize: 15}}>Logout</Text>
-            <Icon name='arrow-forward-circle' style={{color: ICON_COLOR_INVERSE}}/>
+            <Text style={{color: TEXT_COLOR, textTransform: 'capitalize', fontSize: 15, marginRight: 2}}>Logout</Text>
+            <Icon name='chevron-circle-right' type='FontAwesome5' style={{fontSize: 20 , color: ICON_COLOR_INVERSE}}/>
           </Button>
         </Right>
       </Header>
