@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
-import { DIM_WHITE_COLOR, TEXT_COLOR, SECONDARY_COLOR, MAIN_COLOR } from '../../constants/constants';
+import { DIM_WHITE_COLOR, TEXT_COLOR, SECONDARY_COLOR, MAIN_COLOR, FontFamily, PRIMARY_BORDER_RADIUS } from '../../constants/constants';
 import Home from '../../screens/Home';
 import Appointments from '../../screens/Appointments';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -43,10 +43,11 @@ const BottomTab: FunctionComponent<Props> = () => {
         activeTintColor: MAIN_COLOR,
         inactiveTintColor: SECONDARY_COLOR,
         labelPosition: 'beside-icon',
-        labelStyle: {color: TEXT_COLOR},
-        tabStyle: {borderTopLeftRadius: 20, borderTopRightRadius: 20},
+        labelStyle: {fontFamily: FontFamily},
+        tabStyle: {borderTopLeftRadius: 5, borderTopRightRadius: 5},
         activeBackgroundColor: SECONDARY_COLOR,
         style: {borderTopColor: DIM_WHITE_COLOR, borderTopWidth: 0},
+        keyboardHidesTabBar: true,
       }}
     >
       <Tab.Screen name='Home' component={Home} />

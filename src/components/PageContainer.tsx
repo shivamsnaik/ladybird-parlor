@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactChild, useEffect } from 'react';
-import { ViewStyle, StyleProp, StatusBar } from 'react-native';
-import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, ICON_COLOR, ICON_COLOR_INVERSE, TITLE_FONT_SIZE } from '../constants/constants';
+import { ViewStyle, StyleProp, StatusBar, StyleSheet } from 'react-native';
+import { MAIN_COLOR, SECONDARY_COLOR, TEXT_COLOR, ICON_COLOR, ICON_COLOR_INVERSE, TITLE_FONT_SIZE, FontFamily } from '../constants/constants';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 import { AuthContext } from '../security/UserLogin';
@@ -27,11 +27,11 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
           </Button>
         </Left>
         <Body>
-          <Title style={{color: TEXT_COLOR, fontSize: TITLE_FONT_SIZE}}>{headerTitle}</Title>
+          <Title style={[Style.text]}>{headerTitle}</Title>
         </Body>
         <Right>
           <Button transparent onPress={() => {console.log('LOGOUT PRESSED'); logoutUser(dispatch); }}>
-            <Text style={{color: TEXT_COLOR, textTransform: 'capitalize', fontSize: 15, marginRight: 2}}>Logout</Text>
+            <Text style={[Style.text, {fontSize: 15, marginRight: 2}]}>Logout</Text>
             <Icon name='chevron-circle-right' type='FontAwesome5' style={{fontSize: 20 , color: ICON_COLOR_INVERSE}}/>
           </Button>
         </Right>
@@ -42,6 +42,15 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
     </Container>
   );
 };
+
+const Style = StyleSheet.create({
+  text: {
+    color: TEXT_COLOR,
+    fontSize: TITLE_FONT_SIZE,
+    fontFamily: FontFamily,
+    textTransform: 'capitalize',
+  },
+});
 
 PageContainer.defaultProps = {
 };

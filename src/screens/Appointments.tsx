@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import PagePureContainer from '../components/PageContainer';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { TERTIARY_COLOR, SECONDARY_COLOR, MAIN_COLOR, MAIN_FONT_SIZE } from '../constants/constants';
+import { TERTIARY_COLOR, SECONDARY_COLOR, MAIN_COLOR, MAIN_FONT_SIZE, FontFamily } from '../constants/constants';
 import { Text, View, List, ListItem } from 'native-base';
 import { subscribeAppointmentData, unsubscribeToAppointmentData } from '../api/AppointmentsApi';
 import { AuthContext } from '../security/UserLogin';
@@ -92,9 +92,11 @@ const Style = StyleSheet.create({
     color: MAIN_COLOR,
     fontSize: MAIN_FONT_SIZE,
     textTransform: 'capitalize',
+    fontFamily: FontFamily,
   },
   dateStyle: {
     color: MAIN_COLOR,
+    fontFamily: FontFamily,
   },
 });
 export default Appointments;

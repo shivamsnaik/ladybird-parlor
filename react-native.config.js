@@ -1,3 +1,5 @@
 module.exports = {
-  assets: ['./src/assets/fonts/Rezland'],
+  assets: [
+    './src/assets/fonts/Afta-Serif'
+  ],
 };

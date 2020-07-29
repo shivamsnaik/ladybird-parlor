@@ -45,9 +45,9 @@ const RootNavigator: FunctionComponent = () => {
             colors: {
               ...DefaultTheme.colors,
               card: MAIN_COLOR,
-              primary: SECONDARY_COLOR,
+              primary: MAIN_COLOR,
               text: TEXT_COLOR,
-              border: SECONDARY_COLOR,
+              border: MAIN_COLOR,
             },
             dark: true,
           }
@@ -60,7 +60,7 @@ const RootNavigator: FunctionComponent = () => {
           user.isAuthenticated === false ?
             <Login/>
           :
-          <Drawer.Navigator openByDefault={false}>
+          <Drawer.Navigator drawerStyle={{backgroundColor: SECONDARY_COLOR}} openByDefault={false} lazy={false}>
             <Drawer.Screen name='Home' component={BottomTab}/>
           </Drawer.Navigator>
         }

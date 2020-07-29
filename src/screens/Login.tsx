@@ -2,11 +2,12 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { AuthContext } from '../security/UserLogin';
 import { loginWithPhoneNumber, confirmPhoneNumberAuthCode } from '../api/AuthenticationApi';
 import { Container, Header, Form, Item, Label, Input, Text, Button, Body, Title, Toast, Root } from 'native-base';
-import { SECONDARY_COLOR } from '../constants/constants';
+import { SECONDARY_COLOR, FontFamily } from '../constants/constants';
 import FadeAnimationView from '../animations/FadeAnimationView';
 import LoadingPage from './LoadingPage';
 import { Overlay } from 'react-native-elements';
 import { auth } from '../config/FirebaseConfig';
+import { StyleSheet } from 'react-native';
 type Props = {};
 
 const Login: FunctionComponent<Props> = () => {
@@ -42,6 +43,7 @@ const Login: FunctionComponent<Props> = () => {
     console.log('LOGIN: CATCH RECEIVED');
     Toast.show({
       text: errorMessage,
+      textStyle: Style.text,
       buttonText: 'Okay',
       position: 'bottom',
       type: 'danger',
@@ -53,6 +55,7 @@ const Login: FunctionComponent<Props> = () => {
     if (number.length < 10) {
       Toast.show({
         text: 'Please enter a valid mobile number',
+        textStyle: Style.text,
         buttonText: 'Okay',
         position: 'bottom',
         type: 'danger',
@@ -77,14 +80,14 @@ const Login: FunctionComponent<Props> = () => {
           <Container>
             <Header style={{backgroundColor: SECONDARY_COLOR}} androidStatusBarColor={SECONDARY_COLOR}>
               <Body style={{flex: 1, alignItems: 'center'}}>
-                <Title>Login</Title>
+                <Title style={Style.text}>Login</Title>
               </Body>
             </Header>
             <Container style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Form style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Login</Text>
+                <Text style={Style.text}>Login</Text>
                 <Item floatingLabel bordered>
-                  <Label>Mobile Number</Label>
+                  <Label style={Style.text}>Mobile Number</Label>
                   <Input
                     autoCompleteType='tel'
                     autoCapitalize='none'
@@ -97,7 +100,7 @@ const Login: FunctionComponent<Props> = () => {
                 </Item>
                 { loginState === 'confirm' &&
                   <Item floatingLabel bordered>
-                    <Label>Login Code</Label>
+                    <Label style={Style.text}>Login Code</Label>
                     <Input
                       autoCompleteType='off'
                       autoCapitalize='none'
@@ -136,7 +139,7 @@ const Login: FunctionComponent<Props> = () => {
                     }
                   }}
                 >
-                  <Text>{loginState === 'request' ? 'Request Code' : 'Confirm Code'}</Text>
+                  <Text style={Style.text}>{loginState === 'request' ? 'Request Code' : 'Confirm Code'}</Text>
                 </Button>
               </Form>
             </Container>
@@ -147,4 +150,9 @@ const Login: FunctionComponent<Props> = () => {
   );
 };
 
+const Style = StyleSheet.create({
+  text: {
+    fontFamily: FontFamily,
+  },
+});
 export default Login;

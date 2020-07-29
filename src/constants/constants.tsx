@@ -1,4 +1,4 @@
-// Colors
+//#region  Colors
 // export const ORANGE_COLOR='#153347';
 export const DARK_BLUE_COLOR='#188D90';
 
@@ -7,7 +7,8 @@ export const DARK_BLUE_COLOR='#188D90';
 
 // Theme Colors
 export const MAIN_COLOR = '#FFFFFF';
-export const SECONDARY_COLOR = '#FE7A02';
+export const PRIMARY_COLOR = '#9494FF';
+export const SECONDARY_COLOR = '#625db5';
 export const TERTIARY_COLOR = '#f1f1f1';
 export const ICON_COLOR = MAIN_COLOR;
 export const ICON_COLOR_INVERSE = SECONDARY_COLOR;
@@ -41,6 +42,14 @@ export const CARD_COLOR_4 = '#FF5D51';
 export const CARD_COLOR_5 = '#233b4c';
 export const CARD_COLOR_6 = '#DFA350';
 
-
 // LOADING PAGE COLORS
 export const LOADER_COLOR = SECONDARY_COLOR;
+
+export const PRIMARY_BORDER_RADIUS = 15;
+export const SECONDARY_BORDER_RADIUS = 12;
+export const TERTIARY_BORDER_RADIUS = 5;
+//#endregion
+
+//#region
+export const FontFamily = 'AftaSerifThin-Regular';
+//#endregion
