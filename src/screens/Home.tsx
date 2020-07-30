@@ -192,7 +192,7 @@ const Home: FunctionComponent<Props> = ({navigation}) => {
                               justifyContent: 'space-between',
                               height: Style.card.height,
                             }]}
-                            onPress={() => console.log('button pressed', item.service)}
+                            onPress={() => {navigation.navigate('BookAppointment', {price: item.price, name: item.service}); }}
                           >
                             <Text
                               style={[Style.text, {

@@ -11,8 +11,8 @@ const ShrinkAnimationView: FunctionComponent<Props> = ({style, children}) => {
   const shrinkAnimationInitValue = useRef(new Animated.Value(1)).current;
   const shrinkAnimationScale = {scale: shrinkAnimationInitValue.interpolate
     ({
-      inputRange: [0, 0.5, 1],
-      outputRange: [1, 1.25, 2.5],
+      inputRange: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      outputRange: [1, 1.3, 1.6, 1.3, 1, 2.5],
     }),
   };
 
@@ -25,7 +25,7 @@ const ShrinkAnimationView: FunctionComponent<Props> = ({style, children}) => {
       {
         toValue: 0,
         easing: Easing.linear,
-        duration: 100,
+        duration: 400,
         useNativeDriver: true,
       },
     ).start();

@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { View, Text } from 'native-base';
+import { Text } from 'native-base';
 import { SECONDARY_COLOR, MAIN_COLOR, FontFamily, MAIN_FONT_SIZE } from '../constants/constants';
 import {StyleSheet, StatusBar} from 'react-native';
+import ShrinkAnimationView from '../animations/ShrinkAnimationView';
 
 interface Props{
   navigation?: DrawerNavigationProp<ParamListBase, 'Home'>;
@@ -11,12 +12,12 @@ interface Props{
 
 const Rates: FunctionComponent<Props> = () => {
   return(
-    <View style={Style.view}>
+    <ShrinkAnimationView style={Style.view}>
       <StatusBar barStyle='light-content' backgroundColor={SECONDARY_COLOR}/>
       <Text style={[Style.text]}>
         Coming Soon
       </Text>
-    </View>
+    </ShrinkAnimationView>
   );
 };
 
