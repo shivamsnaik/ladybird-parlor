@@ -24,21 +24,21 @@ export const Services = [
 
 export const ServiceDetails = {
   eyebrow: [
-    {service: 'eyebrow1', price: 30},
-    {service: 'eyebrow2', price: 20},
-    {service: 'eyebrow3', price: 40},
-    {service: 'eyebrow4', price: 60},
+    {service: 'Eyebrows 1', price: 30},
+    {service: 'Eyebrows 2', price: 20},
+    {service: 'Eyebrows 3', price: 40},
+    {service: 'Eyebrows 4', price: 60},
   ],
   waxing: [
-    {service: 'waxing1', price: 300},
-    {service: 'waxing2', price: 200},
-    {service: 'waxing3', price: 400},
-    {service: 'waxing4', price: 600},
+    {service: 'Waxing 1', price: 300},
+    {service: 'Waxing 2', price: 200},
+    {service: 'Waxing 3', price: 400},
+    {service: 'Waxing 4', price: 600},
   ],
   facial: [
-    {service: 'facial1', price: 350},
-    {service: 'facial2', price: 250},
-    {service: 'facial3', price: 450},
-    {service: 'facial4', price: 650},
+    {service: 'Facial 1', price: 350},
+    {service: 'Facial 2', price: 250},
+    {service: 'Facial 3', price: 450},
+    {service: 'Facial 4', price: 650},
   ],
 };

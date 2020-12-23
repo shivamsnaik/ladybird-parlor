@@ -11,9 +11,10 @@ type Props = {
   children?: ReactChild;
   drawerNavigation?: DrawerNavigationProp<ParamListBase>;
   style?: StyleProp<ViewStyle>;
+  hideDrawer?: boolean;
 };
 
-const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children, style, drawerNavigation}) => {
+const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children, style, drawerNavigation, hideDrawer}) => {
   useEffect(() => {}, []);
   const {dispatch} = React.useContext(AuthContext);
 
@@ -21,7 +22,7 @@ const PageContainer: FunctionComponent<Props> = ({headerTitle='Header', children
     <Container style={[style]}>
       <Header androidStatusBarColor={MAIN_COLOR} style={{backgroundColor: MAIN_COLOR}}>
         <StatusBar barStyle='dark-content' backgroundColor={MAIN_COLOR}/>
-        <Left>
+        <Left style={{display:hideDrawer === true ? 'none' : 'flex'}}>
           <Button style={{backgroundColor: SECONDARY_COLOR, borderRadius: 10}} transparent onPress={() => drawerNavigation?.toggleDrawer()}>
             <Icon name='menu' type='Entypo' style={{color: ICON_COLOR}}/>
           </Button>
